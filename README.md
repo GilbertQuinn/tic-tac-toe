@@ -64,6 +64,7 @@ The app will be available at **http://localhost:5173** (or the next available po
 npm run build    # Production build → dist/
 npm run preview  # Preview the production build locally
 npm run lint     # Run ESLint
+npm run test     # Run unit tests via Vitest
 ```
 
 ## How to Play
@@ -79,3 +80,13 @@ npm run lint     # Run ESLint
 ## Documentation
 
 See [SPEC.md](./SPEC.md) for the full game specification, component architecture, and design decisions.
+
+## Testing 🧪
+
+The game logic and React components are covered by a suite of unit tests powered by [Vitest](https://vitest.dev) and [React Testing Library](https://testing-library.com/docs/react-testing-library/).
+
+- Run `npm run test` to execute all tests in the `src` directory.
+- Configuration lives in `vite.config.js` and setup helpers are in `src/setupTests.js`.
+- Tests reside alongside their implementation (`*.test.js`, `*.test.jsx`).
+
+You can build on the existing tests or add new ones when extending the app.

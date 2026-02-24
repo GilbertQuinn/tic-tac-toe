@@ -1,0 +1,71 @@
+/* ============================================================
+   index.css — Global reset and base tokens
+   ============================================================ */
+
+/* ── Design tokens ───────────────────────────────────────── */
+:root {
+  --color-bg: #0f172a;
+  --color-surface: #1e293b;
+  --color-surface-2: #334155;
+  --color-border: #475569;
+  --color-text: #f1f5f9;
+  --color-text-muted: #94a3b8;
+
+  --color-x: #f472b6;       /* pink  */
+  --color-x-glow: #f472b640;
+  --color-o: #38bdf8;       /* sky   */
+  --color-o-glow: #38bdf840;
+  --color-win: #fbbf24;     /* amber */
+  --color-win-glow: #fbbf2450;
+
+  --color-primary: #6366f1;
+  --color-primary-hover: #818cf8;
+
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+
+  --transition: 150ms ease;
+
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color-scheme: dark;
+}
+
+/* ── Reset ───────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#root {
+  width: 100%;
+}
+
+h1, h2 {
+  line-height: 1.2;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: default;
+}
+
+ol, ul {
+  list-style: none;
+}

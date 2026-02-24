@@ -1,0 +1,275 @@
+/* ============================================================
+   App.css — All component styles
+   ============================================================ */
+
+/* ── App shell ───────────────────────────────────────────── */
+.app {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  min-height: 100dvh;
+}
+
+/* ── Game container ──────────────────────────────────────── */
+.game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 720px;
+}
+
+/* ── Header ──────────────────────────────────────────────── */
+.game__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+}
+
+.game__title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  background: linear-gradient(135deg, var(--color-x), var(--color-o));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Status banner ───────────────────────────────────────── */
+.game__status {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  padding: 0.5rem 1.25rem;
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  transition: color var(--transition), background var(--transition);
+}
+
+.game__status--over {
+  color: var(--color-win);
+  background: color-mix(in srgb, var(--color-win) 10%, var(--color-surface));
+  border-color: var(--color-win);
+}
+
+/* ── Main content (board + history side-by-side) ─────────── */
+.game__content {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+  width: 100%;
+  justify-content: center;
+}
+
+/* ── Board ───────────────────────────────────────────────── */
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+/* ── Square ──────────────────────────────────────────────── */
+.square {
+  width: clamp(80px, 18vw, 110px);
+  height: clamp(80px, 18vw, 110px);
+  background: var(--color-surface);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: clamp(2rem, 6vw, 2.8rem);
+  font-weight: 800;
+  color: var(--color-text-muted);
+  transition:
+    background var(--transition),
+    border-color var(--transition),
+    transform var(--transition),
+    box-shadow var(--transition);
+}
+
+.square:not(:disabled):not([aria-label^="Square"]):hover {
+  background: var(--color-surface-2);
+  border-color: var(--color-primary);
+  transform: scale(1.04);
+}
+
+/* X squares */
+.square--x {
+  color: var(--color-x);
+  border-color: color-mix(in srgb, var(--color-x) 40%, var(--color-border));
+}
+
+/* O squares */
+.square--o {
+  color: var(--color-o);
+  border-color: color-mix(in srgb, var(--color-o) 40%, var(--color-border));
+}
+
+/* Winning squares */
+.square--winning {
+  background: color-mix(in srgb, var(--color-win) 15%, var(--color-surface));
+  border-color: var(--color-win);
+  color: var(--color-win);
+  box-shadow: 0 0 16px var(--color-win-glow);
+  animation: pop 0.3s ease;
+}
+
+@keyframes pop {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.12); }
+  100% { transform: scale(1); }
+}
+
+/* ── Score board ─────────────────────────────────────────── */
+.scoreboard {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  width: 100%;
+  max-width: 400px;
+}
+
+.scoreboard__player,
+.scoreboard__divider {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.75rem 0.5rem;
+  gap: 0.15rem;
+}
+
+.scoreboard__player--x { background: var(--color-x-glow); }
+.scoreboard__player--o { background: var(--color-o-glow); }
+
+.scoreboard__symbol {
+  font-size: 1.4rem;
+  font-weight: 800;
+}
+
+.scoreboard__player--x .scoreboard__symbol { color: var(--color-x); }
+.scoreboard__player--o .scoreboard__symbol { color: var(--color-o); }
+
+.scoreboard__count,
+.scoreboard__draws {
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.scoreboard__label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+}
+
+.scoreboard__divider {
+  border-left: 1px solid var(--color-border);
+  border-right: 1px solid var(--color-border);
+}
+
+/* ── Move history ────────────────────────────────────────── */
+.history {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 160px;
+  max-height: 380px;
+  overflow-y: auto;
+}
+
+.history__title {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-text-muted);
+}
+
+.history__list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.history-btn {
+  width: 100%;
+  padding: 0.4rem 0.75rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-muted);
+  font-size: 0.82rem;
+  text-align: left;
+  transition: background var(--transition), border-color var(--transition), color var(--transition);
+}
+
+.history-btn:not(:disabled):hover {
+  background: var(--color-surface-2);
+  border-color: var(--color-primary);
+  color: var(--color-text);
+}
+
+.history-btn--active {
+  color: var(--color-text);
+  border-color: var(--color-primary);
+  background: color-mix(in srgb, var(--color-primary) 15%, var(--color-surface));
+}
+
+/* ── Footer buttons ──────────────────────────────────────── */
+.game__footer {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.btn {
+  padding: 0.55rem 1.4rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  font-weight: 600;
+  border: 1px solid transparent;
+  transition: background var(--transition), border-color var(--transition), transform var(--transition);
+}
+
+.btn:active { transform: scale(0.97); }
+
+.btn--primary {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.btn--primary:hover {
+  background: var(--color-primary-hover);
+}
+
+.btn--secondary {
+  background: var(--color-surface);
+  border-color: var(--color-border);
+  color: var(--color-text-muted);
+}
+
+.btn--secondary:hover {
+  border-color: var(--color-primary);
+  color: var(--color-text);
+}
+
+/* ── Responsive: stack on narrow screens ─────────────────── */
+@media (max-width: 520px) {
+  .game__content {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .history {
+    max-height: 200px;
+    width: 100%;
+  }
+}
